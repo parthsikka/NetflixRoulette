@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import fetch from "fetch" ;
 
 class GenreBox extends Component {
     state = { 
@@ -84,9 +83,6 @@ class GenreBox extends Component {
         currGenre : "",
         currGenreKey : ""
      }
-    
-
-
      onGenreClick = (e) =>{
         console.log(e);
         this.props.setGenre(e.target.innerText,e.target.id) ;
@@ -96,14 +92,11 @@ class GenreBox extends Component {
         })
       
      };
-     
-
-
     render() { 
         return (  <div>
-            <div>Select the Genre : </div>
+            <div className="genreButtonsHeading">Select the Genre : </div>
             {this.state.genres.map((genreObject) =>{
-                //<GenreElement></GenreElement>
+                
                 return (<button className="genre btn btn-primary" id={genreObject.id} key={genreObject.id} onClick={this.onGenreClick}>{genreObject.name}</button>) ;
             })}
             </div>        
