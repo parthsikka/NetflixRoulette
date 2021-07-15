@@ -6,7 +6,7 @@ import axios from "axios" ;
 import {API_URL, API_KEY} from "../src/API/secrets" ;
 import Pagination from "./Components/Pagination/pagination"
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import IMDB from './Components/IMDB/IMDB';
+import IMDB from './Components/FilterBar/FilterBar';
 
 class App extends Component {
   state = { 
@@ -16,6 +16,7 @@ class App extends Component {
     currPage : 1 ,
     totalPages : [] ,
     imdb : 8 ,
+    scanPages : 20,
    }
 
    setGenre = (genre,genreKey) => {
@@ -24,11 +25,10 @@ class App extends Component {
       currGenreKey : genreKey,
       imdb : 1,
     }) ;
-    this.loadMovies() ;
+    
    }
 
    loadMovies = async () =>{
-
     let data = await axios.get(API_URL + "/discover/movie",{params : {
                 api_key: API_KEY,
                 page: this.state.currPage,
@@ -53,7 +53,7 @@ class App extends Component {
             }
           }  
         } 
-        console.log(totalMovies) ;
+        
     this.setState({
       movies : totalMovies,
       // totalPages : pages , 
@@ -110,7 +110,13 @@ setRating = (i) =>{
   this.setState({
     imdb : i ,
   })
-  this.loadMovies() ;
+  
+}
+setScanPages = (i) =>{
+  this.setState({
+    scanPages : i ,
+  })
+  
 }
 
   render() { 
@@ -118,7 +124,7 @@ setRating = (i) =>{
       <Router>
       <div className="App">
       <GenreBox setGenre={this.setGenre}></GenreBox>
-      <IMDB setRating={this.setRating}></IMDB>
+      <IMDB setRating={this.setRating} setScanPages={this.setScanPages} searchMovies={this.loadMovies}></IMDB>
         {
           this.state.movies.length ?(
             <React.Fragment>

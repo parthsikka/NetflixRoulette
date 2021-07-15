@@ -84,7 +84,7 @@ class GenreBox extends Component {
         currGenreKey : ""
      }
      onGenreClick = (e) =>{
-        console.log(e);
+        
         this.props.setGenre(e.target.innerText,e.target.id) ;
         this.setState({
             currGenre : e.target.innerText,
@@ -94,7 +94,7 @@ class GenreBox extends Component {
      };
     render() { 
         return (  <div>
-            <div className="genreButtonsHeading">Select the Genre : </div>
+            <div className="genreButtonsHeading"> Select the Genre : </div>
             {this.state.genres.map((genreObject) =>{
                 
                 return (<button className="genre btn btn-primary" id={genreObject.id} key={genreObject.id} onClick={this.onGenreClick}>{genreObject.name}</button>) ;

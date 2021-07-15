@@ -1,0 +1,8 @@
+.headingText{
+    color : white 
+}
+.filterBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
